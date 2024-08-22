@@ -5,9 +5,17 @@ import Wrapper from "../assets/wrappers/Job";
 import { useDispatch } from "react-redux";
 import JobInfo from "./JobInfo";
 import dayjs from "dayjs";
-import { deleteJob } from "../features/job/jobSlice";
+import { deleteJob, setEditJob } from "../features/job/jobSlice";
 
-function Job({ _id: id, position, company, jobLocation, createdAt, status }) {
+function Job({
+  _id: id,
+  position,
+  company,
+  jobLocation,
+  createdAt,
+  jobType,
+  status,
+}) {
   const dispatch = useDispatch();
 
   const date = createdAt;
@@ -34,7 +42,19 @@ function Job({ _id: id, position, company, jobLocation, createdAt, status }) {
             <Link
               to="/add-job"
               className="btn edit-btn"
-              onClick={() => console.log("edit job")}
+              onClick={() =>
+                dispatch(
+                  setEditJob({
+                    editJobId: id,
+                    position,
+                    company,
+                    jobLocation,
+                    jobType,
+                    jobLocation,
+                    status,
+                  })
+                )
+              }
             >
               Edit
             </Link>
